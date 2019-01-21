@@ -6,14 +6,13 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:14:27 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 17:17:44 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 18:22:59 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd_dispatcher.h"
 #include "flags.h"
 #include "operations.h"
-#include <stdio.h>
 
 int	call_ps_cmd(
 	char *cmd, t_list **stack_a, t_list **stack_b, char flags)

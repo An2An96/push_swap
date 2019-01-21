@@ -1,5 +1,5 @@
-FLAGS += -Wall -Wextra -Werror
-FLAGS += -g
+OK_COLOR=\x1b[32;01m
+NO_COLOR=\x1b[0m
 
 INCS_DIR = ./includes
 LIBS_DIR = ./libs
@@ -8,20 +8,19 @@ OBJS_DIR = ./obj
 
 LIBS = libft libftprintf
 
+#	Checker
 CH_SRCS = checker.c stack_utils.c call_cmd.c operations.c
 CH_OBJS = $(addprefix $(OBJS_DIR)/,$(CH_SRCS:%.c=%.o))
 
+#	Push_Swap
 PS_SRCS = push_swap.c operations.c stack_utils.c call_cmd.c insertion_sort.c bubble_sort.c
 PS_OBJS = $(addprefix $(OBJS_DIR)/,$(PS_SRCS:%.c=%.o))
 
+#FLAGS += -Wall -Wextra -Werror
+FLAGS += -g
+
 INCS_FLAGS += -I$(INCS_DIR)
 INCS_FLAGS += $(foreach lib,$(LIBS),-I$(LIBS_DIR)/$(lib)/includes)
-
-#FLAGS += -I$(INCS_DIR)
-#FLAGS += $(foreach lib,$(LIBS),\
-	-I$(LIBS_DIR)/$(lib)/includes \
-	-L$(LIBS_DIR)/$(lib) \
-	-l$(lib:lib%=%))
 
 LIBS_FLAGS += $(foreach lib,$(LIBS),-L$(LIBS_DIR)/$(lib) -l$(lib:lib%=%))
 
@@ -33,7 +32,7 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	gcc $(FLAGS) $(INCS_FLAGS) -c $< -o $@
+	@gcc $(FLAGS) $(INCS_FLAGS) -c $< -o $@
 
 libft:
 	@echo "Make $@..."
@@ -52,7 +51,7 @@ $(CH_OBJS): | $(OBJS_DIR)
 checker: $(CH_OBJS)
 	@echo "Make $@..."
 	@gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
-	@echo "Complete"
+	@echo "$(OK_COLOR)Complete$(NO_COLOR)"
 
 ################################	push_swap	################################
 
@@ -60,8 +59,8 @@ $(PS_OBJS): | $(OBJS_DIR)
 
 push_swap: $(PS_OBJS)
 	@echo "Make $@..."
-	gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
-	@echo "Complete"
+	@gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
+	@echo "$(OK_COLOR)Complete$(NO_COLOR)"
 
 ################################################################################
 
