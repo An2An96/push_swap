@@ -21,7 +21,8 @@ FUNCS =	ft_atoi ft_bzero ft_isalnum ft_isalpha ft_isascii \
 		ft_strnew ft_printchr ft_str_fixlen \
 		ft_pow ft_stoa ft_str_fixlen ft_uitoa_base \
 		ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter \
-		ft_lstmap ft_lstpush ft_lstremove
+		ft_lstmap ft_lstpush ft_lstremove ft_lstlen \
+		get_next_line
 
 SRCS = $(foreach func,$(FUNCS),$(SRCS_DIR)/$(func).c)
 OBJ = $(foreach func,$(FUNCS),$(OBJS_DIR)/$(func).o)

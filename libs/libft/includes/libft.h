@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anorjen <anorjen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 14:45:16 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/16 17:51:37 by anorjen          ###   ########.fr       */
+/*   Updated: 2019/01/21 13:38:26 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <fcntl.h>
+
+# define BUFF_SIZE	9999
+# define MAX_FD		8192
 
 # define ABS(n)		((n < 0) ? -(n) : (n))
 
@@ -92,6 +96,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_lstremove(
 	t_list **alst, t_list *el, void (*del)(void *, size_t));
+int					ft_lstlen(t_list *lst);
 
 char				*ft_itoa_base(long long n, int base);
 char				*ft_uitoa_base(unsigned long long num, int base);
@@ -110,5 +115,7 @@ wchar_t				*ft_wcscpy(wchar_t *dest, const wchar_t *src);
 wchar_t				*ft_wcsjoin(wchar_t const *s1, wchar_t const *s2);
 wchar_t				*ft_wcsdup(const wchar_t *src);
 void				ft_putwstr(wchar_t const *s);
+
+int					get_next_line(const int fd, char **line);
 
 #endif
