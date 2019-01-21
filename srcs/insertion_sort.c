@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 13:46:14 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 14:17:46 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 15:23:35 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,19 @@ int			insertion_sort(t_list **stack_a, t_list **stack_b)
 			i = 0;
 			while (i < min_idx - 1)
 			{
-				ps_push(stack_a, stack_b); cmd_count++;
-				// printf("pb\n");
+				call_ps_cmd("pb", stack_a, stack_b, &cmd_count);
 				i++;
 			}
-			ps_swap(stack_a); cmd_count++;
-			// printf("sa\n");
+			call_ps_cmd("sa", stack_a, stack_b, &cmd_count);
 			i = 0;
 			while (i < min_idx - 1)
 			{
-				ps_push(stack_b, stack_a); cmd_count++;
-				// printf("pa\n");
-				ps_swap(stack_a); cmd_count++;
-				// printf("sa\n");
+				call_ps_cmd("pa", stack_a, stack_b, &cmd_count);
+				call_ps_cmd("sa", stack_a, stack_b, &cmd_count);
 				i++;
 			}
 		}
-		ps_rotate(stack_a); cmd_count++;
-		// printf("ra\n");
+		call_ps_cmd("ra", stack_a, stack_b, &cmd_count);
 		sorted++;
 	}
 	return (cmd_count);

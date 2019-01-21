@@ -8,10 +8,10 @@ OBJS_DIR = ./obj
 
 LIBS = libft
 
-CH_SRCS = checker.c operations.c
+CH_SRCS = checker.c call_cmd.c operations.c
 CH_OBJS = $(addprefix $(OBJS_DIR)/,$(CH_SRCS:%.c=%.o))
 
-PS_SRCS = push_swap.c operations.c insertion_sort.c
+PS_SRCS = push_swap.c operations.c call_cmd.c insertion_sort.c bubble_sort.c
 PS_OBJS = $(addprefix $(OBJS_DIR)/,$(PS_SRCS:%.c=%.o))
 
 INCS_FLAGS += -I$(INCS_DIR)
@@ -33,7 +33,7 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	@gcc $(FLAGS) $(INCS_FLAGS) -c $< -o $@
+	gcc $(FLAGS) $(INCS_FLAGS) -c $< -o $@
 
 libft:
 	@echo "Make $@..."
@@ -55,7 +55,7 @@ $(PS_OBJS): | $(OBJS_DIR)
 
 push_swap: $(PS_OBJS)
 	@echo "Make $@..."
-	@gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
+	gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
 	@echo "Complete"
 
 ################################################################################

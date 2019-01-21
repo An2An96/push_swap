@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 11:52:34 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 14:18:48 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 15:16:13 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,20 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 	copy_stack_a = ft_lstmap(*stack_a, new_stack_el);
 	cmd_count = insertion_sort(&copy_stack_a, stack_b);
 	printf("%d commands\n", cmd_count);
-	// printf("stack a:\n");
-	// ft_lstiter(copy_stack_a, print_stack_el);
-	// printf("stack b:\n");
-	// ft_lstiter(*stack_b, print_stack_el);
+	printf("stack a:\n");
+	ft_lstiter(copy_stack_a, print_stack_el);
+	printf("stack b:\n");
+	ft_lstiter(*stack_b, print_stack_el);
+	ft_lstdel(&copy_stack_a, del_stack_el);
+
+	printf("Bubble Sort: ");
+	copy_stack_a = ft_lstmap(*stack_a, new_stack_el);
+	cmd_count = bubble_sort(&copy_stack_a, stack_b);
+	printf("%d commands\n", cmd_count);
+	printf("stack a:\n");
+	ft_lstiter(copy_stack_a, print_stack_el);
+	printf("stack b:\n");
+	ft_lstiter(*stack_b, print_stack_el);
 	ft_lstdel(&copy_stack_a, del_stack_el);
 }
 

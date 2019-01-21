@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:49:20 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 13:41:24 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 15:34:17 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,37 +47,7 @@ int	main(int argc, char **argv)
 
 		while (get_next_line(0, &buf) > 0)
 		{
-			if (ft_strcmp(buf, "sa") == 0)
-				ps_swap(&stack_a);
-			else if (ft_strcmp(buf, "sb") == 0)
-				ps_swap(&stack_b);
-			else if (ft_strcmp(buf, "ss") == 0)
-			{
-				ps_swap(&stack_a);
-				ps_swap(&stack_b);
-			}
-			else if (ft_strcmp(buf, "pa") == 0)
-				ps_push(&stack_b, &stack_a);
-			else if (ft_strcmp(buf, "pb") == 0)
-				ps_push(&stack_a, &stack_b);
-			else if (ft_strcmp(buf, "ra") == 0)
-				ps_rotate(&stack_a);
-			else if (ft_strcmp(buf, "rb") == 0)
-				ps_rotate(&stack_b);
-			else if (ft_strcmp(buf, "rr") == 0)
-			{
-				ps_rotate(&stack_a);
-				ps_rotate(&stack_b);
-			}
-			else if (ft_strcmp(buf, "rra") == 0)
-				ps_reverse_rotate(&stack_a);
-			else if (ft_strcmp(buf, "rrb") == 0)
-				ps_reverse_rotate(&stack_b);
-			else if (ft_strcmp(buf, "rrr") == 0)
-			{
-				ps_reverse_rotate(&stack_a);
-				ps_reverse_rotate(&stack_b);
-			}
+			call_ps_cmd(buf, &stack_a, &stack_b, NULL);
 		}
 		// printf("stack a:\n");
 		// ft_lstiter(stack_a, print_stack_el);

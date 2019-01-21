@@ -1,0 +1,8 @@
+.vscode
+a.out.dSYM
+**/*.a
+**/*.out
+**/obj
+
+checker
+push_swap

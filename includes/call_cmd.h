@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   call_cmd.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/21 13:48:45 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 15:31:47 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/21 15:26:40 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/21 15:31:13 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "libft.h"
-# include "operations.h"
-# include "call_cmd.h"
-# include <stdio.h>
-
-int 	bubble_sort(t_list **stack_a, t_list **stack_b);
-int		insertion_sort(t_list **stack_a, t_list **stack_b);
-
-#endif
+void	call_ps_cmd(
+	char *cmd, t_list **stack_a, t_list **stack_b, int *cmd_count);
