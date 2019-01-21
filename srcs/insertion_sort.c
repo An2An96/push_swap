@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 13:46:14 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 15:23:35 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:03:48 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	find_min_in_stack(t_list *stack_head, int stack_len, int sorted)
 	return (min_idx);
 }
 
-int			insertion_sort(t_list **stack_a, t_list **stack_b)
+int			insertion_sort(t_list **stack_a, t_list **stack_b, char flags)
 {
 	int i;
 	int min_idx;
@@ -54,21 +54,17 @@ int			insertion_sort(t_list **stack_a, t_list **stack_b)
 		if ((min_idx = find_min_in_stack(*stack_a, stack_len, sorted)) > 0)
 		{
 			i = 0;
-			while (i < min_idx - 1)
-			{
-				call_ps_cmd("pb", stack_a, stack_b, &cmd_count);
-				i++;
-			}
-			call_ps_cmd("sa", stack_a, stack_b, &cmd_count);
+			while (++i < min_idx)
+				cmd_count += call_ps_cmd("pb", stack_a, stack_b, flags);
+			cmd_count += call_ps_cmd("sa", stack_a, stack_b, flags);
 			i = 0;
-			while (i < min_idx - 1)
+			while (++i < min_idx)
 			{
-				call_ps_cmd("pa", stack_a, stack_b, &cmd_count);
-				call_ps_cmd("sa", stack_a, stack_b, &cmd_count);
-				i++;
+				cmd_count += call_ps_cmd("pa", stack_a, stack_b, flags);
+				cmd_count += call_ps_cmd("sa", stack_a, stack_b, flags);
 			}
 		}
-		call_ps_cmd("ra", stack_a, stack_b, &cmd_count);
+		cmd_count += call_ps_cmd("ra", stack_a, stack_b, flags);
 		sorted++;
 	}
 	return (cmd_count);

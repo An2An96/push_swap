@@ -6,14 +6,17 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:14:27 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 15:33:33 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:17:44 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd_dispatcher.h"
+#include "flags.h"
+#include "operations.h"
+#include <stdio.h>
 
 int	call_ps_cmd(
-	char *cmd, t_list **stack_a, t_list **stack_b, int *cmd_count)
+	char *cmd, t_list **stack_a, t_list **stack_b, char flags)
 {
 	int i;
 
@@ -31,11 +34,17 @@ int	call_ps_cmd(
 				g_ps_cmds[i].f(stack_a, stack_b);
 				g_ps_cmds[i].f(stack_b, stack_a);
 			}
-			if (cmd_count)
+			if (!(flags & FLAG_NO_OUTPUT))
 			{
-				(*cmd_count)++;
 				ft_putstr(cmd);
 				ft_putchar('\n');
+			}
+			if (flags & FLAG_DEBUG)
+			{
+				ft_printf("stack a:\n");
+				ft_lstiter(*stack_a, print_stack_el);
+				ft_printf("stack b:\n");
+				ft_lstiter(*stack_b, print_stack_el);
 			}
 			return (1);
 		}

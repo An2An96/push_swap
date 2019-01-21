@@ -1,21 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   flags.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 16:51:18 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/21 16:29:18 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/21 16:50:27 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
-
-# include "libft.h"
-# include "operations.h" 
-# include "call_cmd.h"
-# include "flags.h"
-
-#endif
+# define	FLAG_NO_OUTPUT	1
+# define	FLAG_DEBUG		2

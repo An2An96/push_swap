@@ -6,13 +6,13 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 14:21:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 15:22:10 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 16:41:47 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	bubble_sort(t_list **stack_a, t_list **stack_b)
+int	bubble_sort(t_list **stack_a, t_list **stack_b, char flags)
 {
 	int cmd_count;
 	int stack_len;
@@ -26,15 +26,17 @@ int	bubble_sort(t_list **stack_a, t_list **stack_b)
 		need_sort = 0;
 		while (*stack_a)
 		{
-			if ((*stack_a)->next && *((int*)(*stack_a)->content) > *((int*)((*stack_a)->next)->content))
+			if ((*stack_a)->next
+				&& *((int*)(*stack_a)->content)
+					> *((int*)((*stack_a)->next)->content))
 			{
-				call_ps_cmd("sa", stack_a, stack_b, &cmd_count);
+				cmd_count += call_ps_cmd("sa", stack_a, stack_b, flags);
 				need_sort = 1;
 			}
-			call_ps_cmd("pb", stack_a, stack_b, &cmd_count);
+			cmd_count += call_ps_cmd("pb", stack_a, stack_b, flags);
 		}
 		while (*stack_b)
-			call_ps_cmd("pa", stack_a, stack_b, &cmd_count);
+			cmd_count += call_ps_cmd("pa", stack_a, stack_b, flags);
 	}
 	return (cmd_count);
 }

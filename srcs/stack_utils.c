@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 16:51:18 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/21 17:07:55 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/21 17:17:52 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "operations.h"
 
-# include "libft.h"
-# include "operations.h" 
-# include "call_cmd.h"
-# include "flags.h"
+void print_stack_el(t_list *el)
+{
+	ft_printf("%d\n", *((int*)(el->content)));
+}
 
-#endif
+t_list *new_stack_el(t_list *el)
+{
+	int *content;
+
+	content = (int*)malloc(sizeof(int));
+	*content = *((int*)(el->content));
+	return (ft_lstnew(content, sizeof(int)));
+}
+
+void	del_stack_el(void *content, size_t content_size)
+{
+	free(content);
+	content_size = 0;
+}
