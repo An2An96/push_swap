@@ -6,17 +6,17 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:49:20 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/18 17:39:58 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/21 13:41:24 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "checker.h"
 
-void print_stack_el(t_list *el)
-{
-	printf("%d\n", *((int*)(el->content)));
-}
+// void print_stack_el(t_list *el)
+// {
+// 	printf("%d\n", *((int*)(el->content)));
+// }
 
 int	check_stack(t_list *stack_head)
 {
@@ -31,12 +31,10 @@ int	check_stack(t_list *stack_head)
 
 int	main(int argc, char **argv)
 {
-	t_list *stack_a;
-	t_list *stack_b;
-	t_list *tmp;
-
-	char buf[4];
-	int readed_len;
+	char	*buf;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	t_list	*tmp;
 
 	if (argc > 1)
 	{
@@ -47,9 +45,8 @@ int	main(int argc, char **argv)
 			ft_lstadd(&stack_a, tmp);
 		}
 
-		while ((readed_len = read(0, buf, 4)) > 0)
+		while (get_next_line(0, &buf) > 0)
 		{
-			buf[readed_len - 1] = '\0';
 			if (ft_strcmp(buf, "sa") == 0)
 				ps_swap(&stack_a);
 			else if (ft_strcmp(buf, "sb") == 0)
@@ -87,10 +84,7 @@ int	main(int argc, char **argv)
 		// printf("stack b:\n");
 		// ft_lstiter(stack_b, print_stack_el);
 		
-		if (!stack_b && check_stack(stack_a))
-			write(1, "OK\n", 3);
-		else
-			write(1, "KO\n", 3);
+		write(1, (!stack_b && check_stack(stack_a)) ? "OK\n" : "KO", 3);
 	}
 	return (0);
 }
