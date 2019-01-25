@@ -6,10 +6,10 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:26:40 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 16:36:53 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/24 14:57:24 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	call_ps_cmd(char *cmd, t_list **stack_a, t_list **stack_b, char flags);
+int	call_cmd(char *cmd, t_push_swap *data, char flags);

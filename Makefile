@@ -9,11 +9,12 @@ OBJS_DIR = ./obj
 LIBS = libft libftprintf
 
 #	Checker
-CH_SRCS = checker.c stack_utils.c call_cmd.c operations.c
+CH_SRCS = checker.c stack_utils.c stack.c call_cmd.c operations.c
 CH_OBJS = $(addprefix $(OBJS_DIR)/,$(CH_SRCS:%.c=%.o))
 
 #	Push_Swap
-PS_SRCS = push_swap.c operations.c stack_utils.c call_cmd.c insertion_sort.c bubble_sort.c
+PS_SRCS =	push_swap.c operations.c stack_utils.c stack.c call_cmd.c quick_sort.c insertion_sort.c
+			#insertion_sort.c bubble_sort.c selection_sort.c 
 PS_OBJS = $(addprefix $(OBJS_DIR)/,$(PS_SRCS:%.c=%.o))
 
 #FLAGS += -Wall -Wextra -Werror

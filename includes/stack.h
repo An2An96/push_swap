@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertion_sort.c                                   :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/21 13:46:14 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/24 14:56:24 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/22 13:50:59 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/25 11:43:01 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef	STACK_H
+# define STACK_H
 
-void	insertion_sort(int *arr, int len)
+# include "libft.h"
+
+typedef struct	s_stack
 {
-	int i;
-	int j;
-	int min_idx;
-	int tmp;
+	int			*head;
+	int			len;
+	int			size;
+}				t_stack;
 
-	i = 0;
-	while (i < len)
-	{
-		min_idx = i;
-		j = min_idx;
-		while (++j < len)
-			if (arr[j] < arr[min_idx])
-				min_idx = j;
-		tmp = arr[min_idx];
-		j = min_idx - i;
-		while (j)
-		{
-			arr[i + j] = arr[i + j - 1];
-			j--;
-		}
-		arr[i] = tmp;
-		i++;
-	}
-}
+t_stack		*ft_stack_new(int size);
+void		extend_stack(t_stack *stack, int add_size);
+void		stack_push(t_stack *stack, int value);
+int			stack_pop(t_stack *stack);
+t_stack		*stack_copy(t_stack *src);
+
+#endif

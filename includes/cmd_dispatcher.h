@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:14:46 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/21 15:30:22 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/23 10:40:23 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct	s_cmd {
 	char		cmd[4];
-	void		(*f)(t_list **, t_list **);
+	void		(*f)(t_stack *, t_stack *);
 	char		type_args;
 }				t_cmd;
 
