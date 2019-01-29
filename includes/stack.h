@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 13:50:59 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/25 11:43:01 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:40:15 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void		extend_stack(t_stack *stack, int add_size);
 void		stack_push(t_stack *stack, int value);
 int			stack_pop(t_stack *stack);
 t_stack		*stack_copy(t_stack *src);
+void		stack_delete(t_stack *stack);
 
 #endif

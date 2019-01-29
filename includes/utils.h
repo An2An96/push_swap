@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:19:04 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/29 18:18:41 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/29 18:19:59 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#ifndef UTILS_H
+# define UTILS_H
 
-# include "libft.h"
-# include "operations.h" 
-# include "call_cmd.h"
-# include "flags.h"
 # include "stack.h"
-# include "utils.h"
+
+void	show_stacks(t_stack *stack_a, t_stack *stack_b);
+int		is_stack_sorted(t_stack *stack);
 
 #endif

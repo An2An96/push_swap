@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   ps_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:19:04 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/29 17:15:28 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/29 18:02:38 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "libft.h"
 
-# include "libft.h"
-# include "operations.h" 
-# include "call_cmd.h"
-# include "flags.h"
-# include "stack.h"
-# include "utils.h"
+long	ps_atoi(const char *str)
+{
+	char	negative;
+	long	result;
+	int		i;
 
-#endif
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		negative = 1 - (2 * (str[i] == '-'));
+		i++;
+	}
+	else
+		negative = 1;
+	result = 0;
+	while (ft_isdigit(str[i]))
+	{
+		result = (result * 10) + (str[i] - '0');
+		if (result < 0)
+			return (-((negative + 1) / 2));
+		i++;
+	}
+	return ((long)result * negative);
+}

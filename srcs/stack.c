@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 13:49:33 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/25 12:41:45 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:08:04 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ t_stack	*ft_stack_new(int size)
 	t_stack *stack;
 
 	stack = (t_stack*)malloc(sizeof(t_stack));
-	stack->head = (int*)malloc(size * sizeof(int));
-	stack->len = 0;
-	stack->size = size;
+	if (stack)
+	{
+		stack->head = (int*)malloc(size * sizeof(int));
+		stack->len = 0;
+		stack->size = size;
+	}
 	return (stack);
 }
 
@@ -27,14 +30,17 @@ void	extend_stack(t_stack *stack, int add_size)
 {
 	int *tmp;
 
-	stack->size += add_size;
-	tmp = (int*)malloc(stack->size * sizeof(int));
-	if (stack->head)
+	if (stack)
 	{
-		ft_memmove(tmp, stack->head, stack->len * 4);
-		free(stack->head);
+		stack->size += add_size;
+		tmp = (int*)malloc(stack->size * sizeof(int));
+		if (stack->head)
+		{
+			ft_memmove(tmp, stack->head, stack->len * 4);
+			free(stack->head);
+		}
+		stack->head = tmp;
 	}
-	stack->head = tmp;
 }
 
 void	stack_push(t_stack *stack, int value)

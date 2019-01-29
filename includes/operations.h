@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 13:47:53 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/25 12:54:23 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:10:59 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ typedef struct	s_push_swap
 	char	*commands;
 }				t_push_swap;
 
-void	print_stack_el(t_list *el);
-t_list	*new_stack_el(t_list *el);
-void	del_stack_el(void *content, size_t content_size);
 int		is_stack_sorted(t_stack *stack);
 void	show_stacks(t_stack *stack_a, t_stack *stack_b);
 

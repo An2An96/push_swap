@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 11:52:04 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/25 13:37:50 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:54:24 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,62 @@ void	move_back(t_push_swap *data, char flags)
 {
 	t_list	*next;
 	char	flag;
-	int		i;
+	int		median;
+	int		unit_size;
+	int		rb_op_count;
 
 	if (data->units_sizes)
 	{
-		// t_list *cur = data->units_sizes;
-		// while (cur)
-		// {
-		// 	ft_printf("%d ", INT_CONTENT(cur));
-		// 	cur = cur->next;
-		// }
-
 		flag = INT_CONTENT(data->units_sizes) > 1;
 		while (data->units_sizes
-			&& ((i = INT_CONTENT(data->units_sizes)) == 1 || flag))
+			&& ((unit_size = INT_CONTENT(data->units_sizes)) == 1 || flag))
 		{
-			// ft_printf("\nmove back block %d els (flag: %d)\n", i, flag);
-			if (i == 1)
+			rb_op_count = 0;
+			if (unit_size == 1)
+			{
 				data->sorted++;
-			while (i--)
 				call_cmd("pa", data, flags);
-			next = data->units_sizes->next;
-			ft_lstdelone(&data->units_sizes, del_unit);
-			data->units_sizes = next;
-			if (data->units_sizes)
-				flag = (!flag && INT_CONTENT(data->units_sizes) > 1);
+			}
+			else if (unit_size == 2)
+			{
+				while (--unit_size >= 0)
+					call_cmd("pa", data, flags);
+			}
+			else
+			{
+				median = find_median(data->stack_b,
+					data->stack_b->len - unit_size);
+				while (--unit_size >= 0)
+				{
+					if (*(data->stack_b->head) < median)
+					{
+						call_cmd("rb", data, flags);
+						rb_op_count++;
+					}
+					else
+					{
+						call_cmd("pa", data, flags);
+					}
+				}
+			}
+			if (rb_op_count)
+			{
+				*((int*)data->units_sizes->content) = rb_op_count;
+			}
+			else
+			{
+				next = data->units_sizes->next;
+				ft_lstdelone(&data->units_sizes, del_unit);
+				data->units_sizes = next;
+				if (data->units_sizes)
+					flag = (!flag && INT_CONTENT(data->units_sizes) > 1);
+			}
+			if (rb_op_count)
+			{
+				while (rb_op_count--)
+					call_cmd("rrb", data, flags);
+				break ;
+			}
 		}
 	}
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.h                                          :+:      :+:    :+:   */
+/*   stack_delete.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:19:04 by rschuppe         ###   ########.fr       */
+/*   Created: 2019/01/29 18:08:07 by rschuppe          #+#    #+#             */
+/*   Updated: 2019/01/29 18:08:19 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHECKER_H
-# define CHECKER_H
+#include "stack.h"
 
-# include "libft.h"
-# include "operations.h" 
-# include "call_cmd.h"
-# include "flags.h"
-# include "stack.h"
-# include "utils.h"
-
-#endif
+void	stack_delete(t_stack *stack)
+{
+	if (stack)
+	{
+		free(stack->head);
+		free(stack);
+	}
+}

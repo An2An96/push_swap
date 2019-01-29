@@ -6,25 +6,11 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:49:20 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/24 14:57:24 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:19:13 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-
-int		check_stack(t_stack *stack)
-{
-	int i;
-
-	i = 0;
-	while (i < stack->len - 1)
-	{
-		if (stack->head[i] > stack->head[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 t_push_swap	*read_args(int argc, char **argv)
 {
@@ -54,17 +40,17 @@ t_push_swap	*read_args(int argc, char **argv)
 	return (data);
 }
 
-int		handle_cmds_stream(t_push_swap *data)
+int			handle_cmds_stream(t_push_swap *data)
 {
 	char	*buf;
 	t_list	*stack_b;
 
 	while (get_next_line(0, &buf) > 0)
 		call_cmd(buf, data, FLAG_NO_OUTPUT);
-	return (!(data->stack_b->len) && check_stack(data->stack_a));
+	return (!(data->stack_b->len) && is_stack_sorted(data->stack_a));
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	if (argc > 1)
 		write(1, handle_cmds_stream(read_args(argc, argv)) ? "OK\n" : "KO", 3);
