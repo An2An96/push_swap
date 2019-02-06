@@ -1,16 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:07:55 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:10:55 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/06 20:23:50 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "checker.h"
+
+void	insertion_sort(int *arr, int len)
+{
+	int i;
+	int j;
+	int min_idx;
+	int tmp;
+
+	i = 0;
+	while (i < len)
+	{
+		min_idx = i;
+		j = min_idx;
+		while (++j < len)
+			if (arr[j] < arr[min_idx])
+				min_idx = j;
+		tmp = arr[min_idx];
+		j = min_idx - i;
+		while (j)
+		{
+			arr[i + j] = arr[i + j - 1];
+			j--;
+		}
+		arr[i] = tmp;
+		i++;
+	}
+}
+
+long	ps_atoi(const char *str)
+{
+	char	negative;
+	long	result;
+	int		i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		negative = 1 - (2 * (str[i] == '-'));
+		i++;
+	}
+	else
+		negative = 1;
+	result = 0;
+	while (ft_isdigit(str[i]))
+	{
+		result = (result * 10) + (str[i] - '0');
+		if (result < 0)
+			return (-((negative + 1) / 2));
+		i++;
+	}
+	return ((long)result * negative);
+}
 
 void	show_stacks(t_stack *stack_a, t_stack *stack_b)
 {
@@ -28,13 +80,20 @@ void	show_stacks(t_stack *stack_a, t_stack *stack_b)
 	ft_printf("--- ---\n%-3c %-3c\n", 'a', 'b');
 }
 
-int		is_stack_sorted(t_stack *stack)
+int		is_stack_sorted(t_stack *stack, int bound, int direction)
 {
 	int i;
 
-	i = stack->len;
+	i = bound;
 	while (--i > 0)
-		if (stack->head[i] < stack->head[i - 1])
+		if ((direction == 1 && stack->head[i] < stack->head[i - 1])
+			|| (direction == -1 && stack->head[i] > stack->head[i - 1]))
 			return (0);
 	return (1);
+}
+
+void	del_unit(void *content, size_t content_size)
+{
+	free(content);
+	content_size = 0;
 }

@@ -6,12 +6,11 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 16:57:51 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 15:40:24 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/06 20:17:53 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
-#include "stack.h"
 
 void	ps_push(t_stack *stack_head_src, t_stack *stack_head_dst)
 {

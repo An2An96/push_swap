@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:49:20 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:19:13 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/06 17:48:54 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int			handle_cmds_stream(t_push_swap *data)
 
 	while (get_next_line(0, &buf) > 0)
 		call_cmd(buf, data, FLAG_NO_OUTPUT);
-	return (!(data->stack_b->len) && is_stack_sorted(data->stack_a));
+	return (!(data->stack_b->len)
+		&& is_stack_sorted(data->stack_a, data->stack_a->len, 1));
 }
 
 int			main(int argc, char **argv)

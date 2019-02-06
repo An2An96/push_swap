@@ -6,156 +6,126 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 11:52:04 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 16:54:24 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/06 19:49:09 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	del_unit(void *content, size_t content_size)
+static void	special_handler_for_3_elements(t_push_swap *data, char flags)
 {
-	free(content);
-	content_size = 0;
-}
-
-int		find_median(t_stack *stack, int limit)
-{
-	int *a;
-	int res;
-	int len;
-
-	len = stack->len - limit;
-	if ((a = (int*)malloc(len * sizeof(int))) == 0)
-		exit(1);
-	ft_memmove(a, stack->head, len * sizeof(int));
-	insertion_sort(a, len);
-	res = a[len / 2];
-	free(a);
-	return (res);
-}
-
-void	partition(t_push_swap *data, int pivot, char flags)
-{
-	int el;
-	int *unit_size;
-	int ra_count;
-
-	el = data->stack_a->len - data->sorted;
-	unit_size = (int*)malloc(sizeof(int));
-	*unit_size = 0;
-	ra_count = 0;
-	while (el--)
+	if (data->stack_a->head[0] > data->stack_a->head[1]
+		&& data->stack_a->head[1] > data->stack_a->head[2])
 	{
-		if (*(data->stack_a->head) < pivot)
+		call_cmd("sa", data, flags);
+		call_cmd("rra", data, flags);
+	}
+	else if (data->stack_a->head[0] > data->stack_a->head[1]
+		&& data->stack_a->head[1] < data->stack_a->head[2])
+	{
+		if (data->stack_a->head[0] < data->stack_a->head[2])
+			call_cmd("sa", data, flags);
+		else
+			call_cmd("ra", data, flags);
+	}
+	else if (data->stack_a->head[0] < data->stack_a->head[1]
+		&& data->stack_a->head[1] > data->stack_a->head[2])
+	{
+		if (data->stack_a->head[0] < data->stack_a->head[2])
 		{
-			call_cmd("pb", data, flags);
-			(*unit_size)++;
+			call_cmd("rra", data, flags);
+			call_cmd("sa", data, flags);
 		}
 		else
-		{
-			call_cmd("ra", data, flags);
-			ra_count++;
-		}
-	}
-	if (data->sorted)
-		while (ra_count--)
 			call_cmd("rra", data, flags);
-	ft_lstadd(&data->units_sizes, ft_lstnew(unit_size, sizeof(int)));
+	}
 }
 
-void	move_back(t_push_swap *data, char flags)
+static int	partition_stack_b_helper(t_push_swap *data, char flags)
+{
+	int unit_size;
+	int moved;
+	int i;
+
+	unit_size = INT_CONTENT(data->units_sizes);
+	if (unit_size > 2)
+		moved = partition(data, 'b', unit_size, flags);
+	else
+	{
+		moved = unit_size;
+		if (unit_size == 1)
+			data->sorted++;
+		i = unit_size;
+		while (--i >= 0)
+			call_cmd("pa", data, flags);
+	}
+	return (unit_size - moved);
+}
+
+void		partition_stack_b(t_push_swap *data, char flags)
 {
 	t_list	*next;
 	char	flag;
-	int		median;
-	int		unit_size;
-	int		rb_op_count;
+	int		rest;
 
-	if (data->units_sizes)
+	if (data->stack_b->len && data->units_sizes)
 	{
 		flag = INT_CONTENT(data->units_sizes) > 1;
-		while (data->units_sizes
-			&& ((unit_size = INT_CONTENT(data->units_sizes)) == 1 || flag))
+		while (INT_CONTENT(data->units_sizes) == 1 || flag)
 		{
-			rb_op_count = 0;
-			if (unit_size == 1)
+			rest = partition_stack_b_helper(data, flags);
+			if (rest)
 			{
-				data->sorted++;
-				call_cmd("pa", data, flags);
-			}
-			else if (unit_size == 2)
-			{
-				while (--unit_size >= 0)
-					call_cmd("pa", data, flags);
-			}
-			else
-			{
-				median = find_median(data->stack_b,
-					data->stack_b->len - unit_size);
-				while (--unit_size >= 0)
-				{
-					if (*(data->stack_b->head) < median)
-					{
-						call_cmd("rb", data, flags);
-						rb_op_count++;
-					}
-					else
-					{
-						call_cmd("pa", data, flags);
-					}
-				}
-			}
-			if (rb_op_count)
-			{
-				*((int*)data->units_sizes->content) = rb_op_count;
+				*((int*)data->units_sizes->content) = rest;
+				break ;
 			}
 			else
 			{
 				next = data->units_sizes->next;
 				ft_lstdelone(&data->units_sizes, del_unit);
-				data->units_sizes = next;
-				if (data->units_sizes)
-					flag = (!flag && INT_CONTENT(data->units_sizes) > 1);
-			}
-			if (rb_op_count)
-			{
-				while (rb_op_count--)
-					call_cmd("rrb", data, flags);
-				break ;
+				if (!(data->units_sizes = next))
+					break ;
+				flag = (!flag && INT_CONTENT(data->units_sizes) > 1);
 			}
 		}
 	}
 }
 
-int		quick_sort(t_push_swap *data, char flags)
+static void	partition_stack_a_helper(t_push_swap *data, char flags)
 {
-	int len;
 	int not_sorted;
-	int median;
 
-	len = data->stack_a->len;
-	while (data->sorted < len)
+	not_sorted = data->stack_a->len - data->sorted;
+	if (not_sorted == 1)
+		data->sorted++;
+	else if (not_sorted == 2)
 	{
-		while (data->stack_a->len - data->sorted > 2)
-		{
-			if (is_stack_sorted(data->stack_a))
-				data->sorted = data->stack_a->len;
-			else
-			{
-				median = find_median(data->stack_a, data->sorted);
-				partition(data, median, flags);
-			}
-		}
-		not_sorted = data->stack_a->len - data->sorted;
-		if (not_sorted == 2)
-		{
-			if (data->stack_a->head[0] > data->stack_a->head[1])
-				call_cmd("sa", data, flags);
-			data->sorted += 2;
-		}
-		else if (not_sorted == 1)
-			data->sorted++;
-		move_back(data, flags);
+		if (data->stack_a->head[0] > data->stack_a->head[1])
+			call_cmd("sa", data, flags);
+		data->sorted += 2;
 	}
-	return (1);
+	else if (not_sorted == 3)
+	{
+		special_handler_for_3_elements(data, flags);
+		data->sorted += 3;
+	}
+}
+
+void		partition_stack_a(t_push_swap *data, char flags)
+{
+	int *unit;
+
+	while (data->stack_a->len - data->sorted > 2 + (data->sorted == 0))
+	{
+		if (is_stack_sorted(data->stack_a, data->stack_a->len, 1))
+			data->sorted = data->stack_a->len;
+		else
+		{
+			unit = (int*)malloc(sizeof(int));
+			*unit = partition(data, 'a',
+				data->stack_a->len - data->sorted, flags);
+			ft_lstadd(&data->units_sizes, ft_lstnew(unit, sizeof(int)));
+		}
+	}
+	partition_stack_a_helper(data, flags);
 }

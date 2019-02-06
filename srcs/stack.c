@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 13:49:33 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:08:04 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/06 20:22:22 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,11 @@ int		stack_pop(t_stack *stack)
 	return (value);
 }
 
-t_stack	*stack_copy(t_stack *src)
+void	stack_delete(t_stack *stack)
 {
-	t_stack	*dst;
-
-	dst = (t_stack*)malloc(sizeof(t_stack));
-	dst->size = src->size;
-	dst->len = src->len;
-	dst->head = (int*)malloc(src->size * sizeof(int));
-	if (src->len)
-		ft_memmove(dst->head, src->head, src->len * 4);
-	else
-		dst->head = NULL;
-	return (dst);
+	if (stack)
+	{
+		free(stack->head);
+		free(stack);
+	}
 }

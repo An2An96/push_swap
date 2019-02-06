@@ -9,13 +9,12 @@ OBJS_DIR = ./obj
 LIBS = libft libftprintf
 
 #	Checker
-CH_SRCS = checker.c stack_utils.c stack.c call_cmd.c operations.c
+CH_SRCS = checker.c stack.c call_cmd.c operations.c utils.c
 CH_OBJS = $(addprefix $(OBJS_DIR)/,$(CH_SRCS:%.c=%.o))
 
 #	Push_Swap
-PS_SRCS =	push_swap.c read_args.c operations.c utils.c \
-			ps_atoi.c call_cmd.c quick_sort.c insertion_sort.c \
-			stack.c stack_delete.c
+PS_SRCS =	push_swap.c read_args.c operations.c utils.c stack.c \
+			call_cmd.c quick_sort.c partition.c
 PS_OBJS = $(addprefix $(OBJS_DIR)/,$(PS_SRCS:%.c=%.o))
 
 #FLAGS += -Wall -Wextra -Werror
@@ -61,7 +60,7 @@ $(PS_OBJS): | $(OBJS_DIR)
 
 push_swap: $(PS_OBJS)
 	@echo "Make $@..."
-	@gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
+	gcc $(FLAGS) $(INCS_FLAGS) $(LIBS_FLAGS) $^ -o $@
 	@echo "$(OK_COLOR)Complete$(NO_COLOR)"
 
 ################################################################################

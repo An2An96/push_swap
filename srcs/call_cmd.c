@@ -6,13 +6,12 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:14:27 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:17:14 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/06 20:17:42 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "checker.h"
 #include "cmd_dispatcher.h"
-#include "flags.h"
-#include "operations.h"
 
 static void	call_cmd_helper(char *cmd, t_push_swap *data, char flags)
 {
