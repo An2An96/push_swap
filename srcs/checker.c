@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:49:20 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/07 12:54:00 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 13:06:18 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int			handle_cmds_stream(t_push_swap *data)
 int			main(int argc, char **argv)
 {
 	if (argc > 1)
-		write(1, handle_cmds_stream(read_args(argc, argv)) ? "OK\n" : "KO", 3);
+		write(1, handle_cmds_stream(read_args(argc, argv)) ? "OK\n" : "KO\n", 3);
 	return (0);
 }
