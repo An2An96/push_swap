@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 13:48:45 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:20:33 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:26:25 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,6 @@
 # include "checker.h"
 
 # define INT_CONTENT(a)	*((int*)a->content)
-
-/*
-**	Read and validate functions
-*/
-int		read_args(int argc, char **argv, t_stack *stack, char *flags);
-int		read_args_helper(char **values, t_stack *stack);
-int		check_value(t_stack *stack, int value, int *error);
-int		check_duplicate(t_stack *stack, int value);
 
 /*
 **	Sort algorithm functions

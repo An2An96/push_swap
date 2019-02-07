@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 11:52:04 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 19:49:09 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:25:28 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ static void	partition_stack_a_helper(t_push_swap *data, char flags)
 
 void		partition_stack_a(t_push_swap *data, char flags)
 {
-	int *unit;
+	int		unit;
+	t_list	*new;
 
 	while (data->stack_a->len - data->sorted > 2 + (data->sorted == 0))
 	{
@@ -121,10 +122,11 @@ void		partition_stack_a(t_push_swap *data, char flags)
 			data->sorted = data->stack_a->len;
 		else
 		{
-			unit = (int*)malloc(sizeof(int));
-			*unit = partition(data, 'a',
+			unit = partition(data, 'a',
 				data->stack_a->len - data->sorted, flags);
-			ft_lstadd(&data->units_sizes, ft_lstnew(unit, sizeof(int)));
+			if (!(new = ft_lstnew(&unit, sizeof(int))))
+				exit(-1);
+			ft_lstadd(&data->units_sizes, new);
 		}
 	}
 	partition_stack_a_helper(data, flags);

@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 17:57:03 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/01/29 18:00:34 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 15:37:23 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		check_duplicate(t_stack *stack, int value)
 	return (0);
 }
 
-int		check_value(t_stack *stack, int value, int *error)
+int		check_value(t_stack *stack, long value, int *error)
 {
 	return (*error == 0
 		&& (*error = (value > INT_MAX)) == 0
@@ -49,7 +49,8 @@ int		read_args_helper(char **values, t_stack *stack)
 	extend_stack(stack, i);
 	while (i >= 0)
 	{
-		value = ps_atoi(values[i]);
+		if (!error && ps_atoi(values[i], &value) == 0)
+			error = 1;
 		if (check_value(stack, value, &error))
 			stack_push(stack, value);
 		free(values[i]);

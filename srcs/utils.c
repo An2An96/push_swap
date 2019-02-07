@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:07:55 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:23:50 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:24:05 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ void	insertion_sort(int *arr, int len)
 	}
 }
 
-long	ps_atoi(const char *str)
+int		ps_atoi(const char *str, long *value)
 {
 	char	negative;
-	long	result;
 	int		i;
 
 	i = 0;
@@ -53,15 +52,16 @@ long	ps_atoi(const char *str)
 	}
 	else
 		negative = 1;
-	result = 0;
-	while (ft_isdigit(str[i]))
+	*value = 0;
+	while (str[i])
 	{
-		result = (result * 10) + (str[i] - '0');
-		if (result < 0)
-			return (-((negative + 1) / 2));
+		if (!ft_isdigit(str[i]))
+			return (0);
+		*value = (*value * 10) + (str[i] - '0');
 		i++;
 	}
-	return ((long)result * negative);
+	*value = *value * negative;
+	return (1);
 }
 
 void	show_stacks(t_stack *stack_a, t_stack *stack_b)

@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/07 12:50:40 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:05:19 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ typedef struct	s_cmd {
 }				t_cmd;
 
 /*
+**	Read and validate functions
+*/
+int				read_args(int argc, char **argv, t_stack *stack, char *flags);
+int				read_args_helper(char **values, t_stack *stack);
+int				check_value(t_stack *stack, long value, int *error);
+int				check_duplicate(t_stack *stack, int value);
+
+/*
 **	Call push_swap command
 */
 int				call_cmd(char *cmd, t_push_swap *data, char flags);
@@ -56,7 +64,7 @@ void			ps_reverse_rotate(t_stack *stack_head, t_stack *stack_undef);
 **	Utils functions
 */
 void			insertion_sort(int *arr, int len);
-long			ps_atoi(const char *str);
+int				ps_atoi(const char *str, long *value);
 void			show_stacks(t_stack *stack_a, t_stack *stack_b);
 int				is_stack_sorted(t_stack *stack, int bound, int direction);
 void			del_unit(void *content, size_t content_size);
