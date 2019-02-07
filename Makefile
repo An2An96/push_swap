@@ -11,12 +11,13 @@ OBJS_DIR = ./obj
 LIBS = libft libftprintf
 
 #	Checker
-CH_SRCS = checker.c stack.c call_cmd.c operations.c utils.c
+CH_SRCS =	checker.c \
+			read_args.c operations.c utils.c stack.c call_cmd.c  
 CH_OBJS = $(addprefix $(OBJS_DIR)/,$(CH_SRCS:%.c=%.o))
 
 #	Push_Swap
-PS_SRCS =	push_swap.c read_args.c operations.c utils.c stack.c \
-			call_cmd.c quick_sort.c partition.c
+PS_SRCS =	push_swap.c quick_sort.c partition.c \
+			read_args.c operations.c utils.c stack.c call_cmd.c
 PS_OBJS = $(addprefix $(OBJS_DIR)/,$(PS_SRCS:%.c=%.o))
 
 FLAGS += -Wall -Wextra -Werror
