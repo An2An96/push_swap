@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 15:14:27 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:17:42 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 12:54:17 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,22 @@
 
 static void	call_cmd_helper(char *cmd, t_push_swap *data, char flags)
 {
-	char	*tmp[2];
-
 	if (!(flags & FLAG_NO_OUTPUT))
 	{
-		tmp[0] = ft_strjoin(cmd, "\n");
-		tmp[1] = ft_strjoin(data->commands, tmp[0]);
-		free(tmp[0]);
-		free(data->commands);
-		data->commands = tmp[1];
+		write(1, cmd, ft_strlen(cmd));
+		write(1, "\n", 1);
 	}
 	if (flags & FLAG_DEBUG)
+	{
+		write(1, "\n", 1);
 		show_stacks(data->stack_a, data->stack_b);
+		write(1, "\n", 1);
+	}
 }
 
 int			call_cmd(char *cmd, t_push_swap *data, char flags)
 {
 	int		i;
-	char	*tmp;
-	char	*res;
 
 	i = 0;
 	while (g_ps_cmds[i].f)

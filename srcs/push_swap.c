@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 11:52:34 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:25:32 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 12:50:19 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,12 @@ int		push_swap(t_stack *stack, char flags)
 	data.stack_b = ft_stack_new(stack->size);
 	data.units_sizes = NULL;
 	data.sorted = 0;
-	data.commands = ft_strnew(0);
 	len = data.stack_a->len;
 	while (data.sorted < len)
 	{
 		partition_stack_a(&data, flags);
 		partition_stack_b(&data, flags);
 	}
-	ft_putstr(data.commands);
-	ft_strdel(&data.commands);
 	stack_delete(data.stack_a);
 	stack_delete(data.stack_b);
 	return (1);

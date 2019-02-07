@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 14:49:20 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 17:48:54 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 12:54:00 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_push_swap	*read_args(int argc, char **argv)
 int			handle_cmds_stream(t_push_swap *data)
 {
 	char	*buf;
-	t_list	*stack_b;
 
 	while (get_next_line(0, &buf) > 0)
 		call_cmd(buf, data, FLAG_NO_OUTPUT);

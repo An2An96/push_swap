@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 16:31:09 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:24:26 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/07 12:50:40 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_push_swap
 	t_stack		*stack_b;
 	t_list		*units_sizes;
 	int			sorted;
-	char		*commands;
 }				t_push_swap;
 
 typedef struct	s_cmd {
