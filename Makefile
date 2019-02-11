@@ -50,7 +50,9 @@ libftprintf:
 	@echo "$(OK_COLOR)Complete$(NO_COLOR)"
 
 libmlx:
+	@echo "$(YELLOW_COLOR)Make $@...$(NO_COLOR)"
 	@$(MAKE) -C $(LIBS_DIR)/$@
+	@echo "$(OK_COLOR)Complete$(NO_COLOR)"
 
 ############################		 checker		############################
 
