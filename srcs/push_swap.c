@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 11:52:34 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/11 16:00:09 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/11 16:29:30 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int		main(int argc, char **argv)
 		if (read_args(argc, argv, stack, &flags))
 			push_swap(stack, flags);
 		else
+		{
 			write(1, "Error\n", 6);
+			stack_delete(stack);
+		}
 	}
 	return (0);
 }
