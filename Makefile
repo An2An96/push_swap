@@ -8,11 +8,11 @@ LIBS_DIR = ./libs
 SRCS_DIR = ./srcs
 OBJS_DIR = ./obj
 
-LIBS = libft libftprintf
+LIBS = libft libftprintf libmlx
 
 #	Checker
 CH_SRCS =	checker.c \
-			read_args.c operations.c utils.c stack.c call_cmd.c  
+			read_args.c operations.c utils.c stack.c call_cmd.c visualizer.c
 CH_OBJS = $(addprefix $(OBJS_DIR)/,$(CH_SRCS:%.c=%.o))
 
 #	Push_Swap
@@ -27,6 +27,7 @@ INCS_FLAGS += -I$(INCS_DIR)
 INCS_FLAGS += $(foreach lib,$(LIBS),-I$(LIBS_DIR)/$(lib)/includes)
 
 LIBS_FLAGS += $(foreach lib,$(LIBS),-L$(LIBS_DIR)/$(lib) -l$(lib:lib%=%))
+LIBS_FLAGS += -framework OpenGL -framework AppKit
 
 ################################################################################
 
@@ -47,6 +48,9 @@ libftprintf:
 	@echo "$(YELLOW_COLOR)Make $@...$(NO_COLOR)"
 	@$(MAKE) -C $(LIBS_DIR)/libftprintf
 	@echo "$(OK_COLOR)Complete$(NO_COLOR)"
+
+libmlx:
+	@$(MAKE) -C $(LIBS_DIR)/$@
 
 ############################		 checker		############################
 

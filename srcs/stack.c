@@ -6,11 +6,12 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 13:49:33 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:22:22 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/11 15:22:30 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
+#include "ft_printf.h"
 
 t_stack	*ft_stack_new(int size)
 {
@@ -60,15 +61,13 @@ void	stack_push(t_stack *stack, int value)
 	}
 }
 
-int		stack_pop(t_stack *stack)
+int		stack_pop(t_stack *stack, int *value)
 {
 	int i;
-	int value;
 
-	value = 0;
 	if (stack->len)
 	{
-		value = stack->head[0];
+		*value = stack->head[0];
 		i = 0;
 		while (i < (stack->len - 1))
 		{
@@ -77,15 +76,17 @@ int		stack_pop(t_stack *stack)
 		}
 		stack->head[i] = 0;
 		stack->len--;
+		return (1);
 	}
-	return (value);
+	return (0);
 }
 
 void	stack_delete(t_stack *stack)
 {
 	if (stack)
 	{
-		free(stack->head);
+		if (stack->head)
+			free(stack->head);
 		free(stack);
 	}
 }

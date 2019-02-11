@@ -6,11 +6,11 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 17:57:03 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/07 15:37:23 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/11 16:01:59 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "common.h"
 
 int		check_duplicate(t_stack *stack, int value)
 {

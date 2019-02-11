@@ -6,7 +6,7 @@
 /*   By: rschuppe <rschuppe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 16:57:51 by rschuppe          #+#    #+#             */
-/*   Updated: 2019/02/06 20:17:53 by rschuppe         ###   ########.fr       */
+/*   Updated: 2019/02/10 13:27:17 by rschuppe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	ps_push(t_stack *stack_head_src, t_stack *stack_head_dst)
 {
-	stack_push(stack_head_dst, stack_pop(stack_head_src));
+	int value;
+
+	if (stack_pop(stack_head_src, &value))
+	{
+		stack_push(stack_head_dst, value);
+	}
 }
 
 void	ps_swap(t_stack *stack, t_stack *stack_unused)
